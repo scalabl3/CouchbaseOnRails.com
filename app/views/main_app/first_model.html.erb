@@ -1,0 +1,98 @@
+<br /><br />
+
+<div class="alert alert-error">
+  <strong>Hey There!</strong>&nbsp;&nbsp;&nbsp;I am still writing this up, but I will post as I progress through the content...
+</div>
+
+<br /><br />
+<h1>First Model In Rails</h1>
+<p class="lead">
+    Of course, like everything in technology, there are lots of ways of doing things. I am going to try to be illustrative, and generally prescriptive, without saying this is the the only way. The first thing to realize is how models are represented in Couchbase Documents:
+    Every Document has a key, this key needs to be unique, and the data itself is represented in JSON.
+</p>
+
+
+<h3>Create A Simple Base Class</h3><hr>
+<pre class="prettyprint linenums lang-rb">
+require 'couchbase'
+require 'json'
+
+class ModelBase
+
+  # generic attribute loader
+  def load_parameter_attributes(attributes = {})
+    if !attributes.nil?
+      attributes.each do |name, value|
+        setter = "#{name}="
+        next unless respond_to?(setter)
+        send(setter, value)
+      end
+    end
+  end
+
+end
+</pre>
+
+
+<h3>Create A User Class</h3><hr>
+<p>We are going to keep things simple here, and add more methods as we go, one of the lovely things about working in NoSQL.</p>
+
+<pre class="prettyprint linenums lang-rb">
+class User < ModelBase
+  attr_accessor :name, :email, :password
+  
+  def initialize(attr={})
+    load_parameter_attributes(attr)
+  end
+  
+  # save the User to Couchbase
+  # since email is unique, we'll use that as the key
+  def save        
+    c = Couchbase.bucket
+    c.set(@email.downcase, self.to_json)
+  end
+  
+  # find a User by email address, return nil if it doesn't exist
+  def self.find_by_email(email)
+    c = Couchbase.bucket
+    doc = c.get(email.downcase)
+    return (doc ? User.new(doc) : nil)
+  end
+end
+</pre>
+<p>Couchbase.bucket is a shared connection with only one instance in the Couchbase module.</p>
+
+
+<h3>Create A User Controller</h3><hr>
+<p>Let's make the index page a signup page for the application for example.</p>
+
+<pre class="prettyprint linenums lang-rb">
+class UserController < ApplicationController
+  
+  def index
+		para
+  end
+  
+end
+</pre>
+<p>Couchbase.bucket is a shared connection with only one instance in the Couchbase module.</p>
+
+<h3>Test your User Class</h3><hr>
+<p>A Simple RSpec test for the User class...</p>
+
+<pre class="prettyprint linenums lang-rb">
+
+</pre>
+
+<br /><br />
+
+<!--   
+<ul class="pager">
+	<li class="previous">
+			<a href="/rails">&larr; Setup Rails Project</a>
+	</li>
+	<li class="next">
+    <a href="/rails">Next: Setup Rails Project &rarr;</a>
+  </li> 
+</ul>
+-->

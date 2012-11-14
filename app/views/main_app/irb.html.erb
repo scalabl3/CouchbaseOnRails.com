@@ -1,0 +1,71 @@
+<br /><br />
+<h1>Play with Couchbase in IRB</h1>
+
+
+
+<h3>1. Open IRB and Run Commands</h3><hr>
+
+<pre class="prettyprint linenums lang-rb">
+$ irb
+
+1.9.3-p194 :001 > require 'couchbase'
+ => true 
+
+1.9.3-p194 :002 > c = Couchbase.bucket
+ => #&lt;Couchbase::Bucket:0x007ff93c00ccf0 "http://localhost:8091/pools/default/buckets/default/" default_format=:document, default_flags=0x0, quiet=false, connected=true, timeout=2500000&gt;
+
+1.9.3-p194 :003 > c.set("mykey", { :twitter => "scalabl3" })
+ => 17455646059348361216 
+
+1.9.3-p194 :004 > c.get("mykey")
+ => {"twitter"=>"scalabl3"} 
+
+1.9.3-p194 :005 > c.set("mycounter", 0)
+ => 8613844693868347392 
+
+1.9.3-p194 :006 > c.incr("mycounter")
+ => 1 
+
+1.9.3-p194 :007 > c.incr("mycounter")
+ => 2 
+
+1.9.3-p194 :008 > c.decr("mycounter")
+ => 1 
+
+1.9.3-p194 :009 > 15000.times { |i| c.set("test::#{i}", { :item => i} ) }
+ => 15000
+
+1.9.3-p194 :010 > exit
+</pre>
+
+<br /><br />
+
+
+<h3>2. Check out the Web Console</h3><hr>
+<a href="#modal-1" role="button" class="btn" data-toggle="modal"><img src="/assets/cb_running_1_sm.png" /></a>
+
+<!-- Modal -->
+<div id="modal-1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel" style="color: black;">Console during Load Generation</h3>
+  </div>
+  <div class="modal-body modal-large">
+    <img src="/assets/large/cb_running_1.png" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br /><br /><br />
+
+
+<ul class="pager">
+	<li class="previous">
+	    <a href="/gems">&larr; Install Gems</a>
+	</li>
+  <li class="next">
+    <a href="/rails">Next: Setup Rails Project &rarr;</a>
+  </li>
+</ul>

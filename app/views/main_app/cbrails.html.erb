@@ -1,0 +1,50 @@
+<br /><br />
+<h1>Setup Rails Project</h1>
+
+
+<h4>Create new Rails Project without ActiveRecord ORM</h4><hr>
+<p>The command-line parameter is -O "dash Capital Oh", not a zero. Of course you can mix SQL and NoSQL together, using "polyglot" persistence, however I do not recommend it at the outset of learning NoSQL and Couchbase! It's easier to learn a technology if you are forced to just use it directly and solve design challenges through it.</p>
+
+<pre class="prettyprint linenums lang-bsh w50">
+$ rails new coolapp -O
+$ cd coolapp
+</pre>
+<br />
+
+
+
+<h4>Update Gemfile</h4><hr>
+<p>Add couchbase gem to the Gemfile</p>
+
+<pre class="prettyprint linenums lang-rb w50">
+gem 'couchbase', '>= 1.2.0.z.beta3'
+</pre>
+<br />
+
+
+
+<h4>Bundle Project</h4><hr>
+
+<pre class="prettyprint linenums lang-bsh w50">
+$ bundle install
+</pre>
+<br />
+
+
+<h4>Run Project</h4><hr>
+
+<pre class="prettyprint linenums lang-bsh w50">
+$ rails s
+</pre>
+<br /><br />
+
+
+
+<ul class="pager">
+	<li class="previous">
+	    <a href="/irb">&larr; Play in IRB</a>
+	</li>
+  <li class="next">
+    <a href="/first-model">Next: Create Your First Model &rarr;</a>
+  </li>
+</ul>

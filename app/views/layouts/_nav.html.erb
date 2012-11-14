@@ -1,0 +1,28 @@
+<ul class="nav nav-tabs nav-stacked">
+	<li>
+		<ul class="nav nav-pills">
+			<li class="pill-leader">Fundamentals</li>
+		  <li<%= (request.fullpath == "/understand" ? " class=active" : "") %>><a href="/understand">Understanding Couchbase</a></li>
+			<li<%= (request.fullpath == "/operations" ? " class=active" : "") %>><a href="/operations">Couchbase Operations</a></li>
+		</ul>
+	</li>
+
+	<li>
+		<ul class="nav nav-pills">
+			<li class="pill-leader">Installation & Setup</li>
+		  <li<%= (request.fullpath == "/server" ? " class=active" : "") %>><a href="/server">Install Couchbase Server</a></li>
+		  <li<%= (request.fullpath == "/libcouchbase" ? " class=active" : "") %>><a href="/libcouchbase">Install C Library (libcouchbase)</a></li>
+			<li<%= (request.fullpath == "/gems" ? " class=active" : "") %>><a href="/gems">Install Gems</a></li>
+		</ul>
+	</li>
+	<li>
+		
+		<ul class="nav nav-pills">			
+			<li class="pill-leader">Modeling & Learning</li>
+			<li<%= (request.fullpath == "/irb" ? " class=active" : "") %>><a href="/irb">Play in IRB</a></li>
+			<li<%= (request.fullpath == "/rails" ? " class=active" : "") %>><a href="/rails">Setup Rails Project</a></li>
+			<li<%= (request.fullpath == "/first-model" ? " class=active" : "") %>><a href="/first-model">Your First Model</a></li>
+			<li<%= (request.fullpath == "/learn" ? " class=active" : "") %>><a href="/learn">Learn More</a></li>
+		</ul>
+	</li>
+</ul>

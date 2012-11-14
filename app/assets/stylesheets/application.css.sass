@@ -1,0 +1,156 @@
+//= require_self
+//= require google-code-prettify/prettify
+
+@import bootstrap
+@import bootstrap-responsive
+@import bourbon
+
+body 
+  background: #222
+  padding-top: 20px
+  padding-bottom: 20px
+  font-size: 16px
+
+#site-instruction-list
+  font-size: 18px
+  li
+    font-size: 18px
+    margin-left: 15px
+    line-height: 28px
+      
+$navbar-color: #555
+$navbar-highlight: #555
+$navbar-lowlight: #222
+
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus 
+  background: #222
+  text-decoration: underline
+  color: #F2F2F2
+  font-weight: normal
+  text-shadow: none
+  border-bottom: 2px solid lighten(#08c, 20%)
+  text-decoration: none
+
+.navbar .nav > li > a
+  color: #F2F2F2
+  font-weight: normal
+  text-shadow: none
+
+.navbar .nav > li > a:hover
+  color: darken(#08c, 20%)
+  font-weight: normal
+  text-shadow: none
+  background: darken(#08c, 30%)
+  
+.navbar-inner
+  padding: 1px
+  border-top-left-radius: 0px
+  border-top-right-radius: 0px
+  background-color: $navbar-color
+  background-image: -moz-linear-gradient(top, $navbar-highlight, $navbar-lowlight)
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($navbar-highlight), to($navbar-lowlight))
+  background-image: -webkit-linear-gradient(top, $navbar-highlight, $navbar-lowlight)
+  background-image: -o-linear-gradient(top, $navbar-highlight, $navbar-lowlight)
+  background-image: linear-gradient(to bottom, $navbar-highlight, $navbar-lowlight)
+
+.pill-leader
+  color: #ddd
+  background-color: #444
+  padding-top: 8px
+  padding-bottom: 8px
+  margin-top: 2px
+  margin-bottom: 2px
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+  padding-right: 12px
+  padding-left: 12px
+  margin-right: 2px
+  line-height: 14px
+  width: 150px
+  text-align: right
+  margin-right: 5px
+
+.nav-pills
+  li
+    a:hover
+      color: white
+      background: darken(#08c, 10%)
+  
+#site-title
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light","Helvetica Neue", sans-serif
+  font-weight: 400
+  color: white
+  font-size: 60px
+  
+h1, h2, h3, h4, h5, h6, p, div, table, tr, td, span
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light","Helvetica Neue", sans-serif
+  color: #eee
+  font-weight: 300
+  
+h3
+  margin-top: 100px
+  
+  
+hr
+  color: #333
+  height: 5px
+  border: none
+  background-color: #333
+  margin-top: -14px
+
+blockquote
+  border-left-color: #223570
+  
+h4
+  font-weight: 600
+  
+  
+.pager a, .pager span
+  background-color: darken(#08C, 10%)
+  color: #f2f2f2
+  border: 1px solid darken(#08C, 10%)
+  
+.pager a:hover
+  background-color: #07B
+  border: 1px solid #07B
+  color: white
+  
+pre.prettyprint
+  span
+    font-family: "Courier", "Courier New" !important
+
+body .modal
+
+  //new custom width
+  width: 850px
+
+  //must be half of the width, minus scrollbar on the left (30px)
+  margin: -425px 0 0 -425px
+
+  top: 40%
+  max-height: 100%
+  
+.modal-large
+  max-height: 100%
+  
+//.modal.fade.in
+//  top: 100px
+//  max-height: 620px
+  
+
+a, a:hover, a:visited
+  color: lighten(#08C, 25%)
+
+
+.w50
+  width: 50%
+
+.w60
+  width: 60%
+
+.w70
+  width: 70%
+
+.w80
+  width: 80%

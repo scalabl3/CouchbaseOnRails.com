@@ -1,0 +1,276 @@
+<br />
+<div class="alert alert-error">
+  <strong>Hey There!</strong>&nbsp;&nbsp;&nbsp;I am still writing this up, but I will keep on posting updates as I write the content out...
+</div>
+
+<br /><br />
+<h1>Understanding Couchbase</h1>
+<p>The Goal of this page is to create a solid understanding of what Couchbase is, if you read it and follow it, by the end you should have a solid understanding of Couchbase architecture, how it works, how it is used and where it can fit in your application development.</p>
+
+
+<h3>Q: What is Couchbase?</h3><hr>
+<p class="lead">Couchbase is a Document Database. Couchbase stores data in the form of JSON Documents.</p>
+
+
+
+
+
+<h3>Q: How is that different from Relational Databases?</h3><hr>
+<p>JSON documents are an "aggregate" view of data, which differs considerably from relational models. So, what is an "aggregate"? In the RDBMS (SQL) world, you split your data into supersets of data in the form of tables, this is called "normalization" of the data model. All Users in a Users Table, all Products in a Products Table, etc. with foreign keys to specify how they are related. The data model is spread across your "normalization" into many tables and relationships. When you need to retrieve the data, you are "aggregating" or "denormalizing" the data in your application through queries, joins, where clauses and order by clauses. </p>
+
+<img src="/assets/cb_understand_1.png" /><br clear="all" />	
+Credit: NoSQL Distilled, <a href="http://martinfowler.com/bliki/AggregateOrientedDatabase.html" target="_new">Martin Fowler</a><br />
+<br /><br />
+<p>You also tend to map objects to those tables, and then create relationships between them to find the specific item(s) you need. This is how ActiveRecord is working for you, it's abstracting those relationships in your classes and adding convenience to the process of working with RDBMS's. It helps automatically generate the queries you'd normally write by hand. </p>
+	
+<p>
+Now when you want to retrieve data, let's say a list of Products that a User has ordered, what you are doing is "aggregating" through joins, where clauses, etc. from multiple tables into a single view. <strong>This is an "aggregate view" of the data.</strong></p>
+
+
+
+
+<h3>Q: So then, how do you store data in Couchbase?</h3><hr>
+<p>In Document Databases, instead of breaking things out into separate tables (<em>normalizing</em>) you are actually storing and retrieving <em>aggregates</em> in a denormalized fashion.</p>
+
+<img src="/assets/cb_understand_2.png" /><br clear="all" /><br />
+
+<p>In this diagram, we have a key: o::1001 (order 1001), and a JSON document as the value. In the JSON document we have a uid, the customer name, line_items with sku's, and the payment info. Everything about the Order is aggregated together into the document.</p>
+
+
+
+
+
+
+
+
+
+<h3>Q: What advantages does this type of database give my application?</h3><hr>
+
+<p class="lead">Quick answer: Flexibility, Speed and Scalability.</p>
+
+<p><strong>Flexibility</strong>:&nbsp;&nbsp;Since the schema is flexible, you can change the JSON document key/values on the fly, without database enforced rules, it can also be changed without taking the application down. RDBMS has a fixed schema, and any change to that schema requires taking it down, making changes/migrations and bringing it back up --  costing time and money as you are offline during this process and users cannot interact with the application.</p>
+
+<p><strong>Speed</strong>:&nbsp;&nbsp;Without joins, there is nearly no computation required for Couchbase to return data to you, joins are expensive operations, especially when tables and data get large. If you aren't careful, a complex join in a large database model with complex relationships can bring your system to it's knees. Also, by being able to distribute read/write operations across the cluster, you can minimize latency, making things even faster.</p>
+
+<p><strong>Scalability</strong>:&nbsp;&nbsp;Couchbase can distribute the data across the cluster more easily than a RDBMS system can for many reasons. Let's get into the architecture a little bit to understand why and how it works, and we can do that by describing what happens when you have to scale a RDBMS system. First the background, and then details of the architecture in the next section following.</p>
+
+<br />
+<table id="scaling-diagrams">
+
+<tr>
+		<td class="image"><img src="/assets/cb_understand_3.png" /></td>
+		<td class="spacing">&nbsp;</td>
+		<td class="desc">What a traditional Application started out like, and in 1995 most applications were satisfied by this architecture because the audience/users were typically a fixed and well known size.</td>
+</tr>
+
+<tr>
+	<td class="image"><img src="/assets/cb_understand_4.png" /></td>
+	<td class="spacing">&nbsp;</td>
+	<td class="desc">As the Application increases in demand, more AppServers are added, generally fairly linearly, and SQL DB Server is scaled up a bit too. AppServers can scale linearly, horizontally, (with load balancers) but RDBMS systems scale vertically, meaning adding ram, processors and disk to a single machine.</td>
+</tr>
+
+<tr>
+	<td class="image"><img src="/assets/cb_understand_5.png" /></td>
+	<td class="spacing">&nbsp;</td>
+	<td class="desc">As it continues to grow, SQL DB Server is scaled up considerably, and for efficiency a caching layer is added in front of it to reduce redundant queries (memcached). The relations in the relational model are still being utilized, but performance is degrading due to the size of the data.</td>
+</tr>
+
+<tr>
+	<td class="image"><img src="/assets/cb_understand_6.png" /></td>
+	<td class="spacing">&nbsp;</td>
+	<td class="desc">When you get to WebScale, things get really crazy really fast. You've increased the number of concurrent devices, increased the use cases, and now RDBMS is no longer ideal. In replication, all writes have to go to a single node and write throughput is bottlenecked. Replication in RDBMS is SLOW, data consistency becomes an issue. So you shard instead. Sharding is complex, and brings up many issues, you lose relational ability, you've essentially turned RDBMS into NoSQL. Finally, changing RDBMS paradigms when you have high demand and customers is a very stressful and expensive situation.</td>
+</tr>
+
+<tr>
+	<td class="image"><img src="/assets/cb_understand_7.png" /></td>
+	<td class="spacing">&nbsp;</td>
+	<td class="desc">Couchbase replaces both the caching and persistence layers, collapsing them into a single layer. Write throughput and read throughput go up, you can scale easily, caching is part of the architecture, and you can handle WebScale linearly again, reducing your costs and increasing your profitability.</td>
+</tr>
+
+</table>
+
+
+
+
+
+<h3>Q: So then, what's the difference between memcached and Couchbase?</h3><hr>
+
+<p class="lead">Couchbase and memcached have common roots, but Couchbase has evolved considerably beyond memcached.</p>
+
+<p>Couchbase is both an open-source product and a company. The product is an <em>evolution</em> of memcached. The core contributors of the memcached project (Dustin Sallings, Steve Yen) went on to create Membase Server. While memcached was not a distributed cache, Membase Server was. Caching involves Key-Value Storage in memory. Each memcached instance had it's own set of key-value pairs, and a lot of that data was duplicated across a cluster. Membase Server created a sharding scheme and allowed many machines to act as a single <em>distributed</em> cache, thus optimizing memory usage across machines. This architecture is still the foundation of Couchbase.</p>
+
+<p>The Apache CouchDB creators/founders (Damien Katz, J Chris Anderson) moved away from the CouchDB project and formed CouchOne, and eventually merged with the Membase to form Couchbase. While Couchbase was more of an evolution of Membase Server when it started out, with the release of version 2.0, adding in Secondary Indexes via distributed Map/Reduce, Elastic Search Integration and Cross-Data Center replication (XDCR), Couchbase has become a Document Database. While it doesn't use Apache CouchDB underneath, it does use ideas inspired by CouchDB.</p>
+
+<p>So, Couchbase is very much like memcached with a lot of features to make it faster, more scalable and more flexible added to it including faster and more optimized SDK's. This means Couchbase is compatible with memcached sdk's and gems, it can act as a caching layer, replacing memcached, but it also has advanced distributed persistence as well!</p>
+
+<br /><br />
+<blockquote>
+  <p>Just because of the names, Couchbase is often confused with Apache CouchDB. Some people think it's a CouchDB hosting service, others think it's a fork of the CouchDB project.  (Some people thing it has something to do with Couchsurfing.) Neither is true, Couchbase is it's own open-source product, and it is a company that supports that product. Of course over time everyone will know the difference! Now that you know, spread your knowledge! :)</p>
+</blockquote>
+
+
+
+<h3>Q: How does the architecture work, how does it distribute the data?</h3><hr>
+
+<p>In Couchbase, databases are called Buckets, and Buckets act as a namespace for key value pairs. Applications interact with Couchbase via a connection to a Bucket. Behind the scenes, Couchbase organizes Buckets into 1024 containers called virtual buckets or vBuckets. These vBuckets are evenly distributed across the Couchbase cluster. So if you have one node (machine) then it has all 1024 vBuckets on that machine. If you have two nodes, then you have 512 vBuckets assigned to each. If you have eight nodes in your cluster, the vBuckets are evenly distributed (128 for each server).</p>
+
+<p>Every key gets hashed into a value from 0 to 1023, corresponding to a vBucket. This vBucket has a server node that is responsible for it, and read/write operations go back and forth directly from the SDK Client and the Couchbase Server node directly. This is optimal because you don't have the bottleneck of going through a single entry point.</p>
+
+
+
+
+
+
+
+
+<h3>Q: How does the client SDK know which node to communicate with?</h3><hr>
+
+<p>All the Couchbase SDK clients are "Smart Clients." When they connect to any Couchbase node they retrieve a topology map of the IP addresses of all the nodes in the cluster as well as the vBucket map of which nodes are primary nodes for each vBucket. If you add a node to the cluster and rebalance, all nodes are updated with the new topology map and all connected clients are also updated with the new map. </p>
+
+<p>The C library, libcouchbase, is the Smart Client for the Ruby, PHP, Python and Nodejs SDK's. Java and Clojure have their own native Java based SDK.</p>
+
+
+
+
+
+
+<h3>Q: Ok, so I get how it works for the most part, so if I don't have tables how do I model?</h3><hr>
+
+<p>This is where it becomes evident how entrenched in SQL we have become! The biggest challenge here is how to <strong>think</strong> in NoSQL. It's easiest to understand using a scenario, let's model Users as that's a pretty basic and primary use case for the vast majority of applications out there! Everything is organized into Keys and Values (Documents), so let's start there.</p>
+
+<br />
+<p>Here is a sample Couchbase Document representing a User:</p>
+<pre class="prettyprint linenums lang-yaml w50">
+meta
+{
+  "id": "jasdeep@scalabl3.com",
+  "rev": "2-00000030dcf6bea10000000000000000",
+  "expiration": 0,
+  "flags": 0,
+  "type": "json"  
+}
+
+document
+{
+  "name": "Jasdeep Jaitla",
+  "email": "jasdeep@scalabl3.com",
+  "twitter": "@scalabl3"
+}
+</pre>
+<br />
+<p>As you can see there are two sections, one is the meta information which includes the key (id), the other is the Document value which has the data we have saved.</p>
+
+<p>You could easily create this document in IRB using these commands:</p>
+
+<pre class="prettyprint linenums lang-rb">
+$ irb
+
+1.9.3-p194 :001 > require 'couchbase'
+ => true 
+
+1.9.3-p194 :002 > c = Couchbase.bucket
+ => #&lt;Couchbase::Bucket:0x007ff93c00ccf0 "http://localhost:8091/pools/default/buckets/default/" default_format=:document, default_flags=0x0, quiet=false, connected=true, timeout=2500000&gt;
+
+1.9.3-p194 :003 > user_data = { :name => "Jasdeep Jaitla", :email => "jasdeep@scalable.com", :twitter => "@scalabl3" }
+ => {:name=>"Jasdeep Jaitla", :email=>"jasdeep@scalable.com", :twitter=>"@scalabl3"}
+
+1.9.3-p194 :004 > c.set(user_data[:email].downcase, user_data)
+ => 17455646059348361216 
+
+1.9.3-p194 :005 > c.get("jasdeep@scalabl3.com")
+ => { "name" => "Jasdeep Jaitla", "email" => "jasdeep@scalable.com", "twitter" => "@scalabl3" }
+</pre>
+
+<p>The Couchbase set() method takes the form <span class="code">c.set(key, value)</span>. As you can see, <span class="code">c.set(user_data[:email].downcase, user_data)</span> is storing the data, using the email address as the key, and the Hash (<span class="code">user_data</span>) as the value. The Couchbase get() command takes the form <span class="code">c.get(key)</span>, and that retrieves the value for the key. The key becomes the meta.id, and the value becomes the document. </p> 
+  
+<p>Now of course, that's IRB, how do we do this in a Rails application? Create a model of course!</p>
+
+
+
+
+<h3>Q: Are JSON Documents the only type of data Couchbase can store?</h3><hr>
+
+<p>Actually, no. In Couchbase, instead of JSON documents, you can store simple strings, binary blobs and a special data structure called Atomic Counters. Atomic counter operations are executed on Couchbase Server, and are guaranteed to be executed in order within a Couchbase cluster. Counters are positive integers, and can be used as the basis for many key-value patterns.</p>
+
+<p>Here is an example:</p>
+
+
+<pre class="prettyprint linenums lang-rb">
+$ irb
+
+1.9.3-p194 :001 > require 'couchbase'
+ => true 
+
+1.9.3-p194 :002 > c = Couchbase.bucket
+ => #&lt;Couchbase::Bucket:0x007ff93c00ccf0 "http://localhost:8091/pools/default/buckets/default/" default_format=:document, default_flags=0x0, quiet=false, connected=true, timeout=2500000&gt;
+
+1.9.3-p194 :003 > c.set("my_counter", 1)
+ => 17455646059348361216 
+
+1.9.3-p194 :005 > c.incr("my_counter")
+ => 2
+ 
+1.9.3-p194 :006 > c.incr("my_counter")
+ => 3
+
+1.9.3-p194 :007 > c.decr("my_counter")
+ => 2
+</pre>
+
+
+
+
+<h3>Q: What are common keys used for Couchbase modeling?</h3><hr>
+
+<p>Generally there are two classes of keys, human readable keys and randomly generated keys.</p>
+
+<p>Keys need to be unique in a Bucket, so this naturally leads to what is unique in your data: usernames, email addresses, phone numbers, social media id's, sku's, product names, and then randomly generated id's like UUID, Twitter Snowflake, or NOEQ.</p>
+
+
+
+
+
+<h3>Q: What are the advantages of using each class of key?</h3><hr>
+
+<p>Different types of keys also open up possibilities of different design patterns! Predictable keys like email addresses make looking up documents easier, for instance, when a user logs in with their email address you can then use that to pull their User document and populate your User object with the values. The same is true when you use Facebook ID's and Twitter ID's, etc., it makes it easier to retrieve the User document.</p>
+
+<br />
+<p>This is the area of design creativity and where expertise grows!</p> 
+
+<br />
+<blockquote>
+<p>Now that you have a background on Couchbase, there is some great material on CouchbaseModels.com that talks about different ways of thinking: <a href="http://couchbasemodels.com/strategies" target="_blank">Strategies</a> and <a href="http://couchbasemodels.com/patterns" target="_blank">Design Patterns</a>.
+</blockquote>
+
+<br />
+<p>Here are some examples:</p>
+
+<p><strong>Notification System</strong><br />A mobile application needs to send notifications to users in the future, by design, we want that process to be decoupled from the web application and have a bunch of workers handling those messages, what is a good way to create this scheme?</p>
+
+<p><strong>Solution</strong><br />Create Documents that use a specific time as a key, let's say every minute there is a document that represents that minute and contains the notifications that should be sent. For example, here is a key: "notify::2012-11-20::16:30", and it contains an array of notifications to be sent. A worker can grab that Document at precisely that time and send out push notifications that the document specifies.</p>
+
+<br /><br />
+<p><strong>User Generated Product Catalog</strong><br />We have a product catalog where Users actually create their own products for sale. </p>
+
+<p><strong>Solution</strong><br />In this case, we need to keep track of all the products associated with a User, as well as reference them directly when we display them. This is a great challenge, how can we use keys to do this? In this case we may need two or more different ways to retrieve the products. This is a great segway into Views and Elastic Search Integration (Secondary Indexes) that can help with our design.</p>
+
+
+
+
+
+<h3>Q: What are Primary and Secondary Indexes in Couchbase?</h3><hr>
+
+<p>Now we're getting into some goodies of Couchbase!</p>
+
+*Time for bed, I will resume tomorrow!*
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  

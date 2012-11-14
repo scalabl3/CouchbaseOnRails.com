@@ -1,0 +1,92 @@
+<br /><br />
+<h1>Installing Couchbase Gems</h1>
+
+
+
+<h3>1. Install Couchbase Gem</h3><hr>
+
+<pre class="prettyprint linenums lang-bash">
+$ gem install couchbase --pre
+</pre>
+<br />
+If you followed the installation process, you completed Step 0 and 1, you can start Step 2 on this page: <a href="http://www.couchbase.com/develop/ruby/next" target="_blank">Official Couchbase Ruby Getting Started</a>
+<br /><br />
+<a href="https://github.com/avsej/couchbase-examples-ruby.git" target="_blank">Couchbase Ruby Examples Repo</a>
+
+<br /><br />
+
+<h3>2. Optional Couchbase Gems (currently in development):</h3><hr>
+<br />
+
+<h4>em-couchbase</h4>
+<p>Couchbase SDK for Eventmachine</p> 
+<pre class="prettyprint linenums lang-bash">
+$ gem install em-couchbase
+</pre>
+<a href="https://github.com/couchbaselabs/couchbase-ruby-client-em" target="_blank">github repo/docs</a>
+
+<br /><br /><br />
+
+<h4>couchbase-model</h4>
+<p>ORM-like behavior for Ruby/Rails</p> 
+<pre class="prettyprint linenums lang-bash">
+$ gem install couchbase-model
+</pre>
+<a href="https://github.com/couchbase/couchbase-ruby-model" target="_blank">github repo/docs</a>
+<br /></br />
+
+<a href="http://www.couchbase.com/docs/couchbase-sdk-ruby-1.2/tutorial.html" target="_blank">Official Couchbase Ruby/Rails Tutorial</a>
+<a href="http://www.couchbase.com/docs/couchbase-sdk-ruby-1.2/couchbase-sdk-ruby-tutorial-activerecord.html" target="_blank">Tutorial on couchbase-model gem</a>
+
+<br /><br /><br />
+
+
+<h3>3. Community Optional Gems *alpha (currently in development):</h3><hr>
+<br />
+
+<h4>couchbase-settings</h4>
+<p>A Rails gem for Couchbase Server settings in /config/couchbase.yml, the latest couchbase gem has this as well, but a slightly different format.</p> 
+<pre class="prettyprint linenums lang-bash">
+$ gem install couchbase-settings
+</pre>
+<a href="https://github.com/scalabl3/couchbase-settings" target="_blank">github repo/docs</a>
+
+
+<br /><br /><br />
+
+<h4>couchbase-docstore</h4>
+<p>A wrapper around Couchbase gem, uses Map gem for string/symbol indifference, adds a few methods like initialize_document, and adds versioning options in replace_document (uses couchbase-settings)</p>
+<pre class="prettyprint linenums lang-bash">
+$ gem install couchbase-docstore
+</pre>
+<a href="https://github.com/scalabl3/couchbase-docstore" target="_blank">github repo/docs</a>
+
+<br /><br /><br />
+
+<h4>couchbase-structures</h4>
+<p>Classes for Queue, Stack and SortedList patterns that are persisted to Couchbase (uses couchbase-docstore)</p>
+<pre class="prettyprint linenums lang-bash">
+$ gem install couchbase-structures
+</pre>
+<a href="https://github.com/scalabl3/couchbase-structures" target="_blank">github repo/docs</a>
+
+<br /><br /><br />
+
+<h4>couchbase-patterns (still in alpha, not yet functional)</h4>
+<p>Key/Value Patterns for classes based on patterns on <a href="http://couchbasemodels.com/">CouchbaseModels.com</a> Design Patterns (uses couchbase-docstore)</p>
+<pre class="prettyprint linenums lang-bash">
+$ gem install couchbase-patterns
+</pre>
+<a href="https://github.com/scalabl3/couchbase-patterns" target="_blank">github repo/docs</a>
+
+<br /><br /><br />
+
+
+<ul class="pager">
+	<li class="previous">
+	    <a href="/server">&larr; Install libcouchbase</a>
+	</li>
+  <li class="next">
+    <a href="/irb">Next: Play in IRB &rarr;</a>
+  </li>
+</ul>

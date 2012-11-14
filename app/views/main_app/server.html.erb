@@ -1,0 +1,181 @@
+<br /><br />
+<h1>Installing Couchbase Server on Mac OSX</h1>
+
+<h3>Download for Mac OS X: <a href="http://www.couchbase.com/downloads-all#couchbase-server-2-0-builds" target="_blank">Couchbase Server 2.0 Beta (1870)</a></h3>
+
+<blockquote>
+<h3>Mac OSX: If you are upgrading from Couchbase 1.8.x, Membase or a previous 2.0 Build</h3><hr>
+<br />	
+
+<span class="label label-important">Important</span>&nbsp;&nbsp;I'm Assuming you don't need to save your data... if you do, please do a backup.<br />
+
+<br /><br />
+
+<span class="badge badge-info">1</span>&nbsp;&nbsp;Quit any Currently Running Couchbase Server Instance<br /><br />
+
+<span class="badge badge-info">2</span>&nbsp;&nbsp;Delete "Couchbase Server.app" from Applications<br /><br />
+
+<span class="badge badge-info">3</span>&nbsp;&nbsp;Delete ~/Library/Application Support/Couchbase (and/or if you have it ~/Library/Application Support/Membase)<br /><br />
+
+<span class="badge badge-info">4</span>&nbsp;&nbsp;Open Activity Monitor, search for "epmd" and Quit that process (Erlang Port Manager Daemon), in future builds you won't need this step<br /><br />
+</blockquote>
+
+<h3>Install the new Couchbase Server Build</h3><hr>
+
+<span class="badge badge-success">Go!</span>&nbsp;&nbsp;Unzip and drag "Couchbase Server.app" to your Applications folder<br /><br />
+<span class="badge badge-success">Go!</span>&nbsp;&nbsp;Double-Click the "Couchbase Server.app"<br /><br />
+
+
+
+
+
+
+<br /><br /><br />
+<h2>Complete the Setup: Browse to http://localhost:8091/</h2>
+
+
+
+
+
+
+
+<h3>First Setup Screen</h3><hr>
+<a href="#modal-1" role="button" class="btn" data-toggle="modal"><img src="/assets/cb_setup_1_sm.png" /></a>
+
+<!-- Modal -->
+<div id="modal-1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel" style="color: black;">Setup Screen</h3>
+  </div>
+  <div class="modal-body">
+    <img src="/assets/large/cb_setup_1.png" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br /><br /><br />
+
+
+
+
+
+
+<h3>Setup Memory Capacity and DB File Locations</h3><h4>
+<a href="#modal-2" role="button" class="btn" data-toggle="modal"><img src="/assets/cb_setup_2_sm.png" /></a>
+
+<!-- Modal -->
+<div id="modal-2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel" style="color: black;">Setup Memory Capacity</h3>
+  </div>
+  <div class="modal-body modal-large">
+    <img src="/assets/large/cb_setup_2.png" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br /><br /><br />
+
+
+
+
+
+
+
+<h3>Install Sample Buckets/Views/Data (Can Be Done Later)</h3><hr>
+<a href="#modal-3" role="button" class="btn" data-toggle="modal"><img src="/assets/cb_setup_3_sm.png" /></a>
+
+<!-- Modal -->
+<div id="modal-3" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel" style="color: black;">Install Sample Buckets/Views/Data (Can Be Done Later)</h3>
+  </div>
+  <div class="modal-body modal-large">
+    <img src="/assets/large/cb_setup_3.png" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br /><br /><br />
+
+
+
+
+
+<h3>Setup The Default Bucket Memory</h3><hr>
+<a href="#modal-4" role="button" class="btn" data-toggle="modal"><img src="/assets/cb_setup_5_sm.png" /></a>
+
+<!-- Modal -->
+<div id="modal-4" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel" style="color: black;">Setup The Default Bucket Memory</h3>
+  </div>
+  <div class="modal-body modal-large">
+    <img src="/assets/large/cb_setup_5.png" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br /><br /><br />
+
+
+
+
+<h3>Register Notifications</h3><hr>
+<a href="#modal-5" role="button" class="btn" data-toggle="modal"><img src="/assets/cb_setup_6_sm.png" /></a>
+
+<!-- Modal -->
+<div id="modal-5" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel" style="color: black;">Register Notifications</h3>
+  </div>
+  <div class="modal-body modal-large">
+    <img src="/assets/large/cb_setup_6.png" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br /><br /><br />
+
+
+
+
+<h3>Setup a Password! You're Done!</h3><hr>
+<a href="#modal-6" role="button" class="btn" data-toggle="modal"><img src="/assets/cb_setup_7_sm.png" /></a>
+
+<!-- Modal -->
+<div id="modal-6" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel" style="color: black;">Setup a Password! You're Done!</h3>
+  </div>
+  <div class="modal-body modal-large">
+    <img src="/assets/large/cb_setup_7.png" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<br /><br /><br />
+
+<ul class="pager">
+  <li class="next">
+    <a href="/libcouchbase">Next: Install libcouchbase &rarr;</a>
+  </li>
+</ul>

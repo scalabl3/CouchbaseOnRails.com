@@ -1,0 +1,89 @@
+<br /><br />
+<h1>Installing libcouchbase C Library Mac OS X</h1>
+<p class="lead">The libcouchbase C library is the actual communication layer for the Couchbase gem. It is a binary protocol based "Smart Client" that maintains a map of the Couchbase cluster topology to reduce latency (increases speed). Although Couchbase can be used with a memcached client (like the Dalli gem), the Couchbase SDK's perform much much faster!</p>
+
+<span class="badge badge-info">Tip !</span>&nbsp;&nbsp;The best way to ensure a smooth installation is to upgrade everything to latest versions before installing!<br />
+<span class="badge badge-info">Tip !</span>&nbsp;&nbsp;If you upgraded to Mountain Lion here's a nice guide/tips by Thoughtbot to setup command line: <a href="http://robots.thoughtbot.com/post/27985816073/the-hitchhikers-guide-to-riding-a-mountain-lion" target="_blank">The Hitchhiker’s Guide to Riding a Mountain Lion</a>
+
+<h3>1. Install or upgrade XCode from Mac App Store</h3><hr>
+
+<table>
+<tr><td style="text-align: center;">
+Click Mac AppStore Icon<br />
+<img src="/assets/Mac-App-Store-icon.png" style="border: none;width: 75px;" />
+</td></tr>
+</table>
+<br />
+<span class="badge badge-info">1</span>&nbsp;&nbsp;Search for XCode<br /><br />
+<span class="badge badge-info">2</span>&nbsp;&nbsp;Download & Install XCode (you need your AppleID)<br /><br />
+<span class="badge badge-success">3</span>&nbsp;&nbsp;Crack Open a Beer or Two, this takes a while...
+
+
+
+
+<h3>2. Open XCode, do Upgrades if it Prompts, and Install Command Line Tools:</h3><hr>
+
+<span class="badge badge-info">1</span>&nbsp;&nbsp;Open XCode<br /><br />
+<span class="badge badge-info">2</span>&nbsp;&nbsp;Type CMD-, or click to XCode > Preferences...<br /><br />
+<span class="badge badge-info">3</span>&nbsp;&nbsp;Click on Downloads Tab and Click on Install Button on the row that says Command Line Tools<br /><br />
+
+
+
+
+
+<h3>3. Install Homebrew if you don't have it already</h3><hr>
+<pre class="prettyprint linenums lang-bsh">
+$ ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+</pre>
+
+
+
+
+
+<h3>4. Check your Homebrew</h3><hr>
+<pre class="prettyprint linenums lang-bsh">
+$ brew update
+$ brew doctor
+</pre>
+
+<blockquote>
+<h3>Mac OSX: Just another tip, not needed for libcouchbase, but hard to find when you need it</h3><hr>
+<span class="badge badge-info">Tip !</span>&nbsp;&nbsp;For other gems (like nokogiri) you may need to symlink gcc to gcc4.2: <br /><br />
+<pre class="prettyprint linenums lang-bsh">
+$ sudo ln -s /usr/bin/gcc /usr/bin/gcc-4.2
+</pre>
+<br />
+</blockquote>
+
+
+<blockquote>
+<h3>Mac OSX: If you already had Homebrew and libcouchbase, uninstall it first</h3><hr>
+<pre class="prettyprint linenums lang-bsh">
+$ brew uninstall libcouchbase
+</pre>
+<br />
+</blockquote>
+
+
+
+
+
+<h3>5. Install latest libcouchbase</h3><hr>
+
+<pre class="prettyprint linenums lang-bsh">
+$ brew install https://github.com/couchbase/homebrew/raw/preview/Library/Formula/libcouchbase.rb
+</pre>
+
+
+
+
+<br /><br />
+
+<ul class="pager">
+	<li class="previous">
+	    <a href="/server">&larr; Install Couchbase Server</a>
+	</li>
+  <li class="next">
+    <a href="/gems">Next: Install Gems &rarr;</a>
+  </li>
+</ul>
