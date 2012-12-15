@@ -34,11 +34,11 @@ GEM
       sass (>= 3.2)
       thor
     builder (3.0.4)
-    couchbase (1.2.0.z.beta3)
+    couchbase (1.2.0)
       multi_json (~> 1.0)
       yaji (~> 0.3.2)
     couchbase-documentstore (0.0.5)
-      couchbase (>= 1.2.0.z.beta3)
+      couchbase (>= 1.2.0)
       couchbase-settings (>= 0.0.3)
     couchbase-settings (0.1.0)
     daemons (1.1.9)
@@ -122,7 +122,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   bourbon
-  couchbase (>= 1.2.0.z.beta3)
+  couchbase (>= 1.2.0)
   couchbase-documentstore
   couchbase-settings
   fattr
