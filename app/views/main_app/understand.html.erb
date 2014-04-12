@@ -55,40 +55,37 @@ Now when you want to retrieve data, let's say a list of Products that a User has
 <p><strong>Scalability</strong>:&nbsp;&nbsp;Couchbase can distribute the data across the cluster more easily than a RDBMS system can for many reasons. Let's get into the architecture a little bit to understand why and how it works, and we can do that by describing what happens when you have to scale a RDBMS system. First the background, and then details of the architecture in the next section following.</p>
 
 <br />
-<table id="scaling-diagrams">
+<div class="scaling-diagrams" class="fluid-row">
+  <div class="span7 image"><img src="/assets/cb_understand_3.png" /></div>
+	<div class="span4 desc">What a traditional Application started out like, and in 1995 most applications were satisfied by this architecture because the audience/users were typically a fixed and well known size.</div>
+</div>
 
-<tr>
-		<td class="image"><img src="/assets/cb_understand_3.png" /></td>
-		<td class="spacing">&nbsp;</td>
-		<td class="desc">What a traditional Application started out like, and in 1995 most applications were satisfied by this architecture because the audience/users were typically a fixed and well known size.</td>
-</tr>
+<br />
+<div class="scaling-diagrams" class="fluid-row">
+	<div class="span7 image"><img src="/assets/cb_understand_4.png" /></div>
+	<div class="span4 desc">As the Application increases in demand, more AppServers are added, generally fairly linearly, and SQL DB Server is scaled up a bit too. AppServers can scale linearly, horizontally, (with load balancers) but RDBMS systems scale vertically, meaning adding ram, processors and disk to a single machine.</div>
+</div>
 
-<tr>
-	<td class="image"><img src="/assets/cb_understand_4.png" /></td>
-	<td class="spacing">&nbsp;</td>
-	<td class="desc">As the Application increases in demand, more AppServers are added, generally fairly linearly, and SQL DB Server is scaled up a bit too. AppServers can scale linearly, horizontally, (with load balancers) but RDBMS systems scale vertically, meaning adding ram, processors and disk to a single machine.</td>
-</tr>
 
-<tr>
-	<td class="image"><img src="/assets/cb_understand_5.png" /></td>
-	<td class="spacing">&nbsp;</td>
-	<td class="desc">As it continues to grow, SQL DB Server is scaled up considerably, and for efficiency a caching layer is added in front of it to reduce redundant queries (memcached). The relations in the relational model are still being utilized, but performance is degrading due to the size of the data.</td>
-</tr>
+<br />
+<div class="scaling-diagrams" class="fluid-row">
+	<div class="span7 image"><img src="/assets/cb_understand_5.png" /></div>
+	<div class="span4 desc">As it continues to grow, SQL DB Server is scaled up considerably, and for efficiency a caching layer is added in front of it to reduce redundant queries (memcached). The relations in the relational model are still being utilized, but performance is degrading due to the size of the data.</div>
+</div>
 
-<tr>
-	<td class="image"><img src="/assets/cb_understand_6.png" /></td>
-	<td class="spacing">&nbsp;</td>
-	<td class="desc">When you get to WebScale, things get really crazy really fast. You've increased the number of concurrent devices, increased the use cases, and now RDBMS is no longer ideal. In replication, all writes have to go to a single node and write throughput is bottlenecked. Replication in RDBMS is SLOW, data consistency becomes an issue. So you shard instead. Sharding is complex, and brings up many issues, you lose relational ability, you've essentially turned RDBMS into NoSQL. Finally, changing RDBMS paradigms when you have high demand and customers is a very stressful and expensive situation.</td>
-</tr>
+<br />
+<div class="scaling-diagrams" class="fluid-row">
+	<div class="span7 image"><img src="/assets/cb_understand_6.png" /></div>
+	<div class="span4 desc">When you get to WebScale, things get really crazy really fast. You've increased the number of concurrent devices, increased the use cases, and now RDBMS is no longer ideal. In replication, all writes have to go to a single node and write throughput is bottlenecked. Replication in RDBMS is SLOW, data consistency becomes an issue. So you shard instead. Sharding is complex, and brings up many issues, you lose relational ability, you've essentially turned RDBMS into NoSQL. Finally, changing RDBMS paradigms when you have high demand and customers is a very stressful and expensive situation.</div>
+</div>
 
-<tr>
-	<td class="image"><img src="/assets/cb_understand_7.png" /></td>
-	<td class="spacing">&nbsp;</td>
-	<td class="desc">Couchbase replaces both the caching and persistence layers, collapsing them into a single layer. Write throughput and read throughput go up, you can scale easily, caching is part of the architecture, and you can handle WebScale linearly again, reducing your costs and increasing your profitability.</td>
-</tr>
+<br />
+<div class="scaling-diagrams" class="fluid-row">
+	<div class="span7 image"><img src="/assets/cb_understand_7.png" /></div>
+	<div class="span4 desc">Couchbase replaces both the caching and persistence layers, collapsing them into a single layer. Write throughput and read throughput go up, you can scale easily, caching is part of the architecture, and you can handle WebScale linearly again, reducing your costs and increasing your profitability.</div>
+</div>
 
-</table>
-
+<div class="clearfix">&nbsp;</div>
 
 
 
@@ -260,10 +257,11 @@ $ irb
 
 <h3>Q: What are Primary and Secondary Indexes in Couchbase?</h3><hr>
 
-<p>Now we're getting into some goodies of Couchbase!</p>
+<p>Now we're getting into some goodies of Couchbase 2.0! To understand Indexing in Document Databases, you have to have a general sense of what Map Reduce is, so let's talk about that first.</p>
 
-*Time for bed, I will resume tomorrow!*
+<p>So you have JSON Documents in your database, and they are flexible schema, meaning that, if we use relational terms we could describe each document as a row and each JSON key as a column. This is inaccurate because a JSON value can also be JSON, so it's much more complex than that. From Document to Document there may be a different number and types of "columns," (JSON keys) this is what we mean by "schema flexibility." In Relational Databases, the schema is fixed, meaning it can't be altered while it's running. It also means every row has the same columns, even if their contents are null (empty). This makes modeling data a challenge for sure, especially for data that cannot be easily described with a finite set of columns. NoSQL and Document Databases are particularly good for these use cases.</p>
 
+<p>Continuing on, in Relational Databases, you can easily think of the data as a grid, like Excel, only much larger and without a UI. When you want to find a particular row by a particular column quickly, you Index that column, making optimizations for looking up those values</p>
 
   
   

@@ -17,7 +17,7 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'therubyracer', :platforms => :ruby
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
-
+gem "haml-rails"
 gem 'thin'
 
 # To use ActiveModel has_secure_password

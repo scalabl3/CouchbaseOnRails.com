@@ -19,7 +19,7 @@
     color: #eee
     font-family: Helvetica, Arial, sans-serif
     
-#scaling-diagrams
+#scaling-diagrams2
   width: 100%
   img
     width: 600px !important
@@ -31,3 +31,60 @@
     vertical-align: middle
     font-size: 19px
     line-height: 26px
+    
+#main_app-understand    
+
+  // Large desktop 
+  @media (min-width: 1400px)
+  
+    .scaling-diagrams
+      width: 100%
+      img
+        width: 600px !important
+      .image
+        width: 624px
+      .spacing
+        width: 30px
+      .desc
+        vertical-align: middle
+        font-size: 17px
+        line-height: 24px
+        padding-top: 30px
+        padding-bottom: 50px
+  
+  
+  // Portrait tablet to landscape and desktop
+  @media (min-width: 768px) and (max-width: 1399px)
+
+    .scaling-diagrams
+      width: 100%
+      img
+        width: 500px 
+      .image
+        width: 524px
+      .spacing
+        width: 20px
+      .desc
+        vertical-align: middle
+        font-size: 15px
+        line-height: 22px
+        padding-top: 20px
+        padding-bottom: 50px
+
+  // Landscape phone to portrait tablet 
+  @media (max-width: 767px)
+    .scaling-diagrams
+      img
+        border: 2px solid #999
+        -webkit-border-radius: 5px
+        -moz-border-radius: 5px
+
+  // Landscape phones and down
+  @media (max-width: 480px) 
+    .scaling-diagrams
+      img
+        border: 2px solid #999
+        -webkit-border-radius: 5px
+        -moz-border-radius: 5px
+      
+      

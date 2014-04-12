@@ -1,5 +1,9 @@
 Cbrails::Application.routes.draw do
 
+  get "repo/index"
+
+  get '/sitemap.xml' => 'sitemap#index'
+
   controller :main_app do
     get "/" => :index
     get "/server" => :server

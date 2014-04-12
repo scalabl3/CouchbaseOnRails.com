@@ -15,6 +15,13 @@ $(document).ready(function(){
   // Convert all <pre> tags into nice code blocks
   prettyPrint();
 	detectWindowSize();
+  if (res_width < 1000) {
+    $('div.outside').removeClass("offset1");
+  }      
+  if (res_width < 768) {
+    $('pre.prettyprint').removeClass("w50").removeClass("w60").removeClass("w70").removeClass("w80");
+  }     
+
   
   $("#submit-comment").click(function(e){
     e.preventDefault();
