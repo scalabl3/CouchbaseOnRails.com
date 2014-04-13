@@ -10,8 +10,8 @@ bind                  "unix:///www/run/cbrails.sock"
 activate_control_app  "unix:///www/run/cbrailsctl.sock"
 pidfile               '/www/run/cbrails.pid'
 state_path            "/www/run/cbrails.state"
-stdout_redirect       "/www/log/cbmodels.stdout.log", "/www/log/cbmodels.stderr.log"
-environment           ENV['env_cbmodels'] || 'production'
+stdout_redirect       "/www/log/cbrails.stdout.log", "/www/log/cbrails.stderr.log"
+environment           ENV['env_cbrails'] || 'production'
 on_worker_boot do
 
 end
