@@ -5,12 +5,8 @@ gem 'rails', '3.2.8'
 
 gem 'fattr'
 gem 'map'
-gem 'yettings'
-gem 'couchbase', '>= 1.2.0.z.beta3'
-gem 'couchbase-settings'
-gem 'couchbase-documentstore'
 gem 'bourbon'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', "~> 2.3.1"   
 gem 'yajl-ruby'
 
 gem 'sass-rails',   '~> 3.2.3'
@@ -18,7 +14,7 @@ gem 'therubyracer', :platforms => :ruby
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem "haml-rails"
-gem 'thin'
+gem 'puma'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
