@@ -7,11 +7,16 @@ rackup                DefaultRackup
 #port                 ENV['port_cbmodels'] || 3001
 daemonize             true
 bind                  "unix:///www/run/cbrails.sock"
-activate_control_app  "unix:///www/run/cbrailsctl.sock"
 pidfile               '/www/run/cbrails.pid'
-state_path            "/www/run/cbrails.state"
 stdout_redirect       "/www/log/cbrails.stdout.log", "/www/log/cbrails.stderr.log"
 environment           ENV['env_cbrails'] || 'production'
+
+#control app considered broken right now (puma github)
+#activate_control_app  "unix:///www/run/cbrailsctl.sock"
+
+#state file considered broken right now (puma github)
+#state_path            "/www/run/cbrails.state"
+
 on_worker_boot do
 
 end
