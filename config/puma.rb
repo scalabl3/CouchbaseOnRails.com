@@ -8,7 +8,7 @@ rackup                DefaultRackup
 daemonize             true
 bind                  "unix:///www/run/cbrails.sock"
 pidfile               '/www/run/cbrails.pid'
-stdout_redirect       "/www/log/cbrails.stdout.log", "/www/log/cbrails.stderr.log"
+stdout_redirect       "/www/log/puma-cbrails-stdout.log", "/www/log/puma-cbrails-stderr.log"
 environment           ENV['env_cbrails'] || 'production'
 
 #control app considered broken right now (puma github)
